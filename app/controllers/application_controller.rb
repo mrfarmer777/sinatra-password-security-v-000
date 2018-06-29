@@ -18,7 +18,7 @@ class ApplicationController < Sinatra::Base
 
 	post "/signup" do
 		#your code here!
-		@user=User.new(username:params[:username], password:params[:password])
+		user=User.new(username:params[:username], password:params[:password])
 		#user can't be created if they didn't fill out the password field
 		if user.save #if they can be saved
 			redirect "/login"
