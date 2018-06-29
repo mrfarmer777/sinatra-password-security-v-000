@@ -35,9 +35,10 @@ class ApplicationController < Sinatra::Base
 	post "/login" do
 		#your code here!
 		user = User.find_by(:username=>params[:username])
-		if user
-			redirect "/success"
-		else 
+		if user && user.authenticate(params[:password]) #if user was found and they authenticated properly using bcrypt auth...
+			session[:user_id]=user.id #set session user_id to the user's id
+			redirect "/success" #send em to success
+		else
 			redirect "/failure"
 		end
 
